@@ -1,0 +1,129 @@
+@import "colors.css";
+
+* {
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+tooltip {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 12px;
+    color: @text;
+    padding: 4px 8px;
+}
+
+/* ── Clock ──────────────────────────────── */
+#clock {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 14px;
+    padding: 0 20px;
+    margin: 7px 6px 7px 0;
+    color: @blue;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+}
+
+/* ── Window title ───────────────────────── */
+#window {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 14px;
+    padding: 0 18px;
+    margin: 7px 4px;
+    color: @subtext0;
+    font-style: italic;
+}
+
+/* ── Workspaces (center) ────────────────── */
+#workspaces {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 14px;
+    margin: 7px 0;
+    padding: 2px 4px;
+}
+
+#workspaces button {
+    padding: 2px 13px;
+    background: transparent;
+    color: @subtext0;
+    border-radius: 10px;
+    margin: 1px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+#workspaces button.active {
+    background: @blue;
+    color: @base;
+    font-weight: bold;
+    animation: ws-pop 0.25s ease-out;
+}
+
+#workspaces button:hover:not(.active) {
+    background: @surface1;
+    color: @text;
+}
+
+@keyframes ws-pop {
+    0%   { opacity: 0.0; background-color: transparent; }
+    40%  { opacity: 0.7; }
+    100% { opacity: 1.0; background-color: @blue; }
+}
+
+/* ── Stat pills ─────────────────────────── */
+#network,
+#cpu,
+#memory,
+#pulseaudio,
+#battery {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 14px;
+    padding: 0 15px;
+    margin: 7px 3px;
+}
+
+#network  { color: @mauve; margin-left: 0; }
+#cpu      { color: @blue;  }
+#memory   { color: @mauve; }
+#pulseaudio { color: @text; }
+
+#pulseaudio.muted { color: @subtext0; }
+
+#battery { color: @text; }
+#battery.charging,
+#battery.plugged  { color: @blue; }
+#battery.warning:not(.charging)  { color: @mauve; }
+
+#battery.critical:not(.charging) {
+    color: #ff6e6e;
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% { color: @text; }
+}
+
+/* ── Tray ───────────────────────────────── */
+#tray {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 14px;
+    padding: 0 12px;
+    margin: 7px 0 7px 3px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}

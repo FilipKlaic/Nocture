@@ -1,0 +1,524 @@
+@import 'colors.css';
+
+/* ════════════════════════════════════════════════
+   Global resets (GTK3-safe — no multi-value transitions,
+   no box-shadow in *, no unsupported properties)
+   ════════════════════════════════════════════════ */
+* {
+    outline: none;
+    -GtkTreeView-expander-size: 12;
+    -gtk-icon-style: symbolic;
+}
+
+/* ════════════════════════════════════════════════
+   Window / background
+   ════════════════════════════════════════════════ */
+window,
+.background {
+    background-color: @base;
+    color: @text;
+}
+
+/* ════════════════════════════════════════════════
+   Titlebar / Headerbar
+   ════════════════════════════════════════════════ */
+.titlebar,
+headerbar,
+.header-bar {
+    background-color: @surface0;
+    border-bottom: 1px solid @border_c;
+    box-shadow: none;
+    padding: 4px 8px;
+    color: @text;
+}
+
+.titlebar .title,
+headerbar .title {
+    font-weight: bold;
+    color: @text;
+}
+
+.titlebar button,
+headerbar button {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 7px;
+    color: @subtext0;
+    box-shadow: none;
+    min-height: 0;
+    min-width: 0;
+}
+
+.titlebar button:hover,
+headerbar button:hover {
+    background-color: @hover_bg;
+    color: @text;
+}
+
+.titlebar button:active,
+headerbar button:active {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+/* ════════════════════════════════════════════════
+   Toolbar
+   ════════════════════════════════════════════════ */
+toolbar {
+    background-color: @surface0;
+    border-bottom: 1px solid @border_c;
+    padding: 3px 6px;
+    box-shadow: none;
+}
+
+toolbar button,
+toolbutton button {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 8px;
+    color: @subtext0;
+    box-shadow: none;
+    min-height: 0;
+}
+
+toolbar button:hover,
+toolbutton button:hover {
+    background-color: @hover_bg;
+    color: @text;
+}
+
+toolbar button:active,
+toolbar button:checked,
+toolbutton button:active {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+toolbar separator {
+    background-color: @border_c;
+    margin: 4px 3px;
+    min-width: 1px;
+}
+
+/* ════════════════════════════════════════════════
+   Path / location bar
+   ════════════════════════════════════════════════ */
+.path-bar button,
+.location-button {
+    background: transparent;
+    border: none;
+    border-radius: 7px;
+    padding: 4px 9px;
+    color: @subtext0;
+    box-shadow: none;
+    min-height: 0;
+}
+
+.path-bar button:hover,
+.location-button:hover {
+    background-color: @hover_bg;
+    color: @text;
+}
+
+.path-bar button:last-child,
+.path-bar button:only-child {
+    color: @text;
+    font-weight: bold;
+}
+
+/* ════════════════════════════════════════════════
+   Sidebar
+   ════════════════════════════════════════════════ */
+.sidebar,
+.side-panel {
+    background-color: @sidebar_bg;
+    border-right: 1px solid @border_c;
+    color: @text;
+}
+
+.sidebar treeview,
+.side-panel treeview {
+    background-color: transparent;
+    color: @text;
+    border: none;
+}
+
+.sidebar treeview row,
+.side-panel treeview row {
+    border-radius: 7px;
+    padding: 3px 6px;
+    margin: 1px 5px;
+    min-height: 26px;
+}
+
+.sidebar treeview row:hover,
+.side-panel treeview row:hover {
+    background-color: @hover_bg;
+}
+
+.sidebar treeview row:selected,
+.side-panel treeview row:selected {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+.sidebar treeview row:selected image {
+    color: @blue;
+}
+
+.sidebar treeview row:selected label {
+    color: @blue;
+}
+
+/* ════════════════════════════════════════════════
+   Content views
+   ════════════════════════════════════════════════ */
+.view,
+.view > * {
+    background-color: @base;
+    color: @text;
+}
+
+/* ─── Icon view ─── */
+iconview {
+    background-color: @base;
+    color: @text;
+}
+
+iconview.view {
+    background-color: @base;
+}
+
+iconview item {
+    border-radius: 9px;
+    padding: 6px 4px;
+}
+
+iconview item:hover {
+    background-color: @hover_bg;
+}
+
+iconview item:selected {
+    background-color: @select_bg;
+    color: @blue;
+    border-radius: 9px;
+}
+
+iconview.view:selected {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+/* ─── List / details view ─── */
+treeview {
+    background-color: @base;
+    color: @text;
+}
+
+treeview.view {
+    background-color: @base;
+    color: @text;
+}
+
+treeview row {
+    min-height: 28px;
+    border-radius: 7px;
+    padding: 1px 6px;
+    margin: 1px 6px;
+}
+
+treeview row:hover {
+    background-color: @hover_bg;
+}
+
+treeview row:selected {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+treeview.view:selected {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+treeview header button {
+    background-color: @surface0;
+    border: none;
+    border-bottom: 1px solid @border_c;
+    border-right: 1px solid @border_c;
+    color: @subtext0;
+    font-size: 12px;
+    padding: 4px 8px;
+    box-shadow: none;
+}
+
+treeview header button:hover {
+    background-color: @surface1;
+    color: @text;
+}
+
+/* ════════════════════════════════════════════════
+   Status bar
+   ════════════════════════════════════════════════ */
+statusbar,
+.statusbar {
+    background-color: @surface0;
+    border-top: 1px solid @border_c;
+    color: @subtext0;
+    font-size: 12px;
+    padding: 3px 10px;
+}
+
+/* ════════════════════════════════════════════════
+   Scrollbars — minimal
+   ════════════════════════════════════════════════ */
+scrollbar {
+    background: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    background-color: @border_c;
+    border-radius: 10px;
+    min-width: 4px;
+    min-height: 4px;
+    margin: 2px;
+}
+
+scrollbar slider:hover {
+    background-color: @subtext0;
+}
+
+scrollbar trough {
+    background: transparent;
+}
+
+/* ════════════════════════════════════════════════
+   Entry / search
+   ════════════════════════════════════════════════ */
+entry {
+    background-color: @surface0;
+    border: 1px solid @border_c;
+    border-radius: 9px;
+    color: @text;
+    caret-color: @blue;
+    box-shadow: none;
+    padding: 6px 12px;
+}
+
+entry:focus {
+    border-color: @blue;
+    box-shadow: none;
+}
+
+entry image {
+    color: @subtext0;
+}
+
+/* ════════════════════════════════════════════════
+   Buttons
+   ════════════════════════════════════════════════ */
+button {
+    background-color: @surface0;
+    border: 1px solid @border_c;
+    border-radius: 9px;
+    color: @text;
+    box-shadow: none;
+    padding: 6px 14px;
+    min-height: 0;
+}
+
+button:hover {
+    background-color: @surface1;
+}
+
+button:active {
+    background-color: @select_bg;
+    color: @blue;
+}
+
+button.flat {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+button.flat:hover {
+    background-color: @hover_bg;
+}
+
+button.suggested-action {
+    background-color: @blue;
+    border-color: @blue;
+    color: @base;
+    font-weight: bold;
+}
+
+button.destructive-action {
+    background-color: @red;
+    border-color: @red;
+    color: @base;
+}
+
+/* ════════════════════════════════════════════════
+   Context menus
+   ════════════════════════════════════════════════ */
+menu {
+    background-color: @surface0;
+    border: 1px solid @border_c;
+    border-radius: 11px;
+    padding: 5px;
+    color: @text;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+menu menuitem {
+    border-radius: 7px;
+    padding: 6px 14px;
+    color: @text;
+    min-height: 0;
+}
+
+menu menuitem:hover {
+    background-color: @hover_bg;
+    color: @blue;
+}
+
+menu menuitem image {
+    color: @subtext0;
+}
+
+menu menuitem:hover image {
+    color: @blue;
+}
+
+menu separator {
+    background-color: @border_c;
+    margin: 4px 8px;
+    min-height: 1px;
+}
+
+/* ════════════════════════════════════════════════
+   Tooltips
+   ════════════════════════════════════════════════ */
+tooltip {
+    background-color: @surface1;
+    border: 1px solid @border_c;
+    border-radius: 8px;
+    color: @text;
+    padding: 4px 8px;
+    box-shadow: none;
+}
+
+tooltip label {
+    color: @text;
+}
+
+/* ════════════════════════════════════════════════
+   Dialogs
+   ════════════════════════════════════════════════ */
+.dialog-action-area {
+    background-color: @surface0;
+    border-top: 1px solid @border_c;
+    padding: 8px;
+}
+
+/* ════════════════════════════════════════════════
+   Check / radio
+   ════════════════════════════════════════════════ */
+checkbutton check {
+    background-color: @surface0;
+    border: 1px solid @border_c;
+    border-radius: 4px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+checkbutton check:checked {
+    background-color: @blue;
+    border-color: @blue;
+    color: @base;
+}
+
+radiobutton radio {
+    background-color: @surface0;
+    border: 1px solid @border_c;
+    border-radius: 50%;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+radiobutton radio:checked {
+    background-color: @blue;
+    border-color: @blue;
+    color: @base;
+}
+
+/* ════════════════════════════════════════════════
+   Progress bar
+   ════════════════════════════════════════════════ */
+progressbar trough {
+    background-color: @surface1;
+    border-radius: 10px;
+    min-height: 4px;
+    border: none;
+}
+
+progressbar progress {
+    background-color: @blue;
+    border-radius: 10px;
+    border: none;
+}
+
+/* ════════════════════════════════════════════════
+   Separator
+   ════════════════════════════════════════════════ */
+separator {
+    background-color: @border_c;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+/* ════════════════════════════════════════════════
+   Notebook / tabs
+   ════════════════════════════════════════════════ */
+notebook {
+    background-color: @base;
+}
+
+notebook header {
+    background-color: @surface0;
+    border-bottom: 1px solid @border_c;
+}
+
+notebook header tab {
+    background-color: transparent;
+    border-radius: 8px 8px 0 0;
+    padding: 6px 14px;
+    color: @subtext0;
+}
+
+notebook header tab:checked {
+    background-color: @base;
+    color: @text;
+    border-bottom: 2px solid @blue;
+}
+
+notebook header tab:hover:not(:checked) {
+    background-color: @hover_bg;
+    color: @text;
+}
+
+/* ════════════════════════════════════════════════
+   Popover
+   ════════════════════════════════════════════════ */
+popover {
+    background-color: @surface0;
+    border: 1px solid @border_c;
+    border-radius: 11px;
+    padding: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    color: @text;
+}

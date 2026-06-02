@@ -1,0 +1,22 @@
+# Ignore everything by default
+*
+!.gitignore
+
+# Track only these directories
+!hypr/
+!hypr/**
+!waybar/
+!waybar/**
+!swaync/
+!swaync/**
+!kitty/
+!kitty/**
+!gtk-3.0/
+!gtk-3.0/**
+!rofi/
+!rofi/**
+
+# Ignore generated/cache files
+waybar/colors/
+hypr/colors.conf
+hypr/colors.lua
