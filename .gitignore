@@ -1,6 +1,7 @@
 # Ignore everything by default
 *
 !.gitignore
+!README.md
 
 # Track only these directories
 !hypr/
