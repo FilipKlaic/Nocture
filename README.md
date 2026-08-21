@@ -53,7 +53,10 @@ swaync/     notification center config + two swappable themes (glass / modern)
 kitty/      terminal config + matugen-generated theme
 gtk-3.0/    Thunar's "Nebula" theme (static, not matugen)
 rofi/       adi1090x launcher pack + a dozen swappable color schemes, matugen.rasi is live
+wallpapers/ active wallpaper set, renamed wallpaper-01..31 for readability
 ```
+
+Wallpapers are named `wallpaper-NN.ext` in both this repo and the live `~/Pictures/wallpapers` folder — an archived/unused subset stays out of both. If you rename the live file waypaper is currently pointed at, update `wallpaper = ` in `~/.config/waypaper/config.ini` to match, or the next restore will fail to find it.
 
 Generated/cache files that matugen rewrites on every wallpaper change are gitignored (`hypr/colors.conf`, `hypr/colors.lua`, `waybar/colors/`) so they don't create noisy diffs.
 
