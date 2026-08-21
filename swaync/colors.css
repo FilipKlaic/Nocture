@@ -1,6 +1,6 @@
-@define-color text #e7e2d5;
-@define-color base #14140c;
-@define-color base-tr rgba(20, 20, 12, 0.8);
-@define-color widget-bg rgba(33, 32, 23, 0.4);
-@define-color surface1 #2b2a21;
-@define-color blue #d1c973;
+@define-color text #dfe3e7;
+@define-color base #0f1417;
+@define-color base-tr rgba(15, 20, 23, 0.8);
+@define-color widget-bg rgba(27, 32, 35, 0.4);
+@define-color surface1 #262b2e;
+@define-color blue #8bd0ef;

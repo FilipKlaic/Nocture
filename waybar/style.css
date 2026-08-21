@@ -9,70 +9,88 @@
 }
 
 window#waybar {
-    background: transparent;
+    /* Tinted glass panel — actually blurs now that hyprland.lua's layer_rule
+       for the "waybar" namespace has blur + ignore_alpha set. */
+    background: alpha(@surface0, 0.35);
     color: @text;
 }
 
 tooltip {
     background: @surface0;
     border: 1px solid @surface1;
-    border-radius: 12px;
+    border-radius: 10px;
     color: @text;
     padding: 4px 8px;
 }
 
+/* ── Shared pill treatment ───────────────── */
+/* One declaration for every module "card" instead of repeating
+   background/border/radius per-module (kept 10px to match Hyprland's
+   decoration.rounding). Each module below only overrides color/spacing. */
+#clock,
+#window,
+#workspaces,
+#network,
+#cpu,
+#memory,
+#pulseaudio,
+#battery,
+#tray,
+#mpris,
+#custom-wlogout {
+    background: alpha(@surface0, 0.85);
+    border: 1px solid @surface1;
+    border-radius: 10px;
+    margin: 0 6px 6px 6px;
+}
+
 /* ── Clock ──────────────────────────────── */
 #clock {
-    background: @surface0;
-    border: 1px solid @surface1;
-    border-radius: 14px;
-    padding: 0 20px;
-    margin: 7px 6px 7px 0;
+    padding: 14px 4px;
     color: @blue;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
 }
 
 /* ── Window title ───────────────────────── */
 #window {
-    background: @surface0;
-    border: 1px solid @surface1;
-    border-radius: 14px;
-    padding: 0 18px;
-    margin: 7px 4px;
+    padding: 8px 2px;
     color: @subtext0;
     font-style: italic;
+    font-size: 11px;
 }
 
 /* ── Workspaces (center) ────────────────── */
 #workspaces {
-    background: @surface0;
-    border: 1px solid @surface1;
-    border-radius: 14px;
-    margin: 7px 0;
-    padding: 2px 4px;
+    padding: 4px 2px;
 }
 
 #workspaces button {
-    padding: 2px 13px;
+    padding: 8px 4px;
     background: transparent;
     color: @subtext0;
-    border-radius: 10px;
-    margin: 1px;
-    transition: background 0.15s ease, color 0.15s ease;
+    border-radius: 8px;
+    margin: 1px 0;
+    opacity: 0.6;
+    transition: background 0.15s ease, color 0.15s ease, opacity 0.3s ease-in-out;
 }
 
 #workspaces button.active {
     background: @blue;
     color: @base;
     font-weight: bold;
+    opacity: 1;
+    /* Subtle accent glow — our own addition, not something the reference
+       repo does (it explicitly zeroes box-shadow everywhere). */
+    box-shadow: 0 0 10px alpha(@blue, 0.55);
     animation: ws-pop 0.25s ease-out;
 }
 
 #workspaces button:hover:not(.active) {
     background: @surface1;
     color: @text;
+    opacity: 0.9;
 }
 
 @keyframes ws-pop {
@@ -87,14 +105,10 @@ tooltip {
 #memory,
 #pulseaudio,
 #battery {
-    background: @surface0;
-    border: 1px solid @surface1;
-    border-radius: 14px;
-    padding: 0 15px;
-    margin: 7px 3px;
+    padding: 10px 2px;
 }
 
-#network  { color: @mauve; margin-left: 0; }
+#network  { color: @mauve; }
 #cpu      { color: @blue;  }
 #memory   { color: @mauve; }
 #pulseaudio { color: @text; }
@@ -117,11 +131,22 @@ tooltip {
 
 /* ── Tray ───────────────────────────────── */
 #tray {
-    background: @surface0;
-    border: 1px solid @surface1;
-    border-radius: 14px;
-    padding: 0 12px;
-    margin: 7px 0 7px 3px;
+    padding: 8px 2px;
+}
+
+/* ── Media player ───────────────────────── */
+#mpris {
+    padding: 10px 2px;
+    color: @mauve;
+    font-style: italic;
+    font-size: 11px;
+}
+
+/* ── Power button ───────────────────────── */
+#custom-wlogout {
+    padding: 10px 2px;
+    color: @blue;
+    font-size: 15px;
 }
 
 #tray > .passive {

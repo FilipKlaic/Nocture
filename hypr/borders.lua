@@ -2,10 +2,10 @@
 return {
     active_border = { 
         colors = { 
-            "rgba(d1c973ee)", 
-            "rgba(a5d0baee)" 
+            "rgba(8bd0efee)", 
+            "rgba(c6c2eaee)" 
         }, 
         angle = 45 
     },
-    inactive_border = "rgba(36352caa)"
+    inactive_border = "rgba(303538aa)"
 }

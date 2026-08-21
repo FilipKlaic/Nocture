@@ -1,14 +1,14 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-  "positionX": "right",
+  "positionX": "center",
   "positionY": "top",
   "layer": "overlay",
   "cssPriority": "user",
 
   "control-center-width": 300,
   "control-center-height": 600,
-  "control-center-margin-top": 45,
-  "control-center-margin-right": 650,
+  "control-center-margin-top": 52,
+  "control-center-margin-right": 0,
   "control-center-margin-left": 0,
 
   "notification-margin-top": 20,

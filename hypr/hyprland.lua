@@ -36,7 +36,7 @@ hl.config({
 local terminal    = "kitty"
 local fileManager = "thunar"
 local menu        = "/home/filip/.config/rofi/launchers/type-1/launcher.sh"
-local browser     = "firefox"
+local browser     = "zen-browser"
 
 -------------------
 ---- AUTOSTART ----
@@ -45,10 +45,11 @@ package.loaded["borders"] = nil
 local borders = require("borders")
 
 hl.on("hyprland.start", function ()
-hl.exec_cmd("/home/filip/.config/waybar/launch.sh")
-hl.exec_cmd("waypaper --restore")
-hl.exec_cmd("nm-applet --indicator")
-hl.exec_cmd("awww-daemon")
+    hl.exec_cmd("qs")
+    hl.exec_cmd("waypaper --restore")
+    hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("awww-daemon")
+    hl.exec_cmd("hypridle")
 end)
 
 -----------------------
@@ -74,6 +75,12 @@ hl.config({
             size    = 6,
             passes  = 3,
             new_optimizations = true,
+        },
+        shadow = {
+            enabled      = true,
+            range        = 15,
+            render_power = 2,
+            color        = "0x99000000",
         },
     },
     animations = {
@@ -150,6 +157,32 @@ hl.config({
 -- Gestures (3-finger swipe to switch workspaces)
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
+--------------------------
+---- WORKSPACE LAYOUT ----
+--------------------------
+-- Workspaces 1-3 → laptop (eDP-2), workspaces 4-6 → external (HDMI-A-1)
+-- When HDMI-A-1 is disconnected, workspaces 4-6 fall back to eDP-2 automatically
+-- Only the per-monitor anchor workspace (1 and 4) is persistent, so it's always
+-- there as a fallback. The rest must NOT be persistent, or Hyprland never destroys
+-- them when empty and waybar keeps showing them as open until a manual reload.
+hl.workspace_rule({ workspace = "1", monitor = "eDP-2",   default = true,  persistent = true })
+hl.workspace_rule({ workspace = "2", monitor = "eDP-2" })
+hl.workspace_rule({ workspace = "3", monitor = "eDP-2" })
+hl.workspace_rule({ workspace = "4", monitor = "HDMI-A-1", default = true,  persistent = false })
+hl.workspace_rule({ workspace = "5", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1" })
+
+--------------------
+---- LAYER RULES ----
+--------------------
+-- Quickshell status bar + rofi both get real compositor blur behind their
+-- translucent backgrounds. The status bar's own slide is client-side
+-- (margin Behavior in StatusBarWindow.qml, same pattern as SidebarApp),
+-- so no "animation" is set here -- it would double up with that.
+hl.layer_rule({ match = { namespace = "quickshell-statusbar" }, blur = true, ignore_alpha = 0.2 })
+hl.layer_rule({ match = { namespace = "quickshell-statusbar-sysmon" }, blur = true, ignore_alpha = 0.2 })
+hl.layer_rule({ match = { namespace = "rofi" },   blur = true, ignore_alpha = 0.2 })
+
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -164,12 +197,13 @@ hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + B",      hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + W",      hl.dsp.exec_cmd("waypaper"))
 hl.bind(mainMod .. " + CTRL + W", hl.dsp.exec_cmd("waypaper --random"))
+hl.bind(mainMod .. " + CTRL + B", hl.dsp.exec_cmd("qs ipc call statusbar toggle")) -- Toggle Quickshell status bar
 hl.bind(mainMod .. " + SPACE",  hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + V",      hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F",      hl.dsp.window.fullscreen())
 
--- Workspace Management (1-5)
-for i = 1, 5 do
+-- Workspace Management (1-6)
+for i = 1, 6 do
     hl.bind(mainMod .. " + " .. i,           hl.dsp.focus({ workspace = i }))
     hl.bind(mainMod .. " + SHIFT + " .. i,   hl.dsp.window.move({ workspace = i }))
 end
@@ -180,6 +214,9 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.5 @DEFAUL
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true })
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl set 5%+"),                         { locked = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl set 5%-"),                         { locked = true })
+
+-- Display Power
+hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/refresh-toggle.sh")) -- Toggle 144/60 Hz
 
 -- Screenshots (Hyprshot)
 hl.bind("PRINT",                hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots"))

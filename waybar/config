@@ -1,9 +1,10 @@
 {
     "layer": "top",
-    "position": "top",
-    "height": 44,
-    "margin": "8 12 0 12",
+    "position": "left",
+    "width": 70,
+    "margin": "8 0 8 8",
     "spacing": 0,
+    "on-sigusr1": "toggle",
     "modules-left": [
         "clock",
         "hyprland/window"
@@ -12,12 +13,13 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "network",
+        "tray",
         "cpu",
         "memory",
         "pulseaudio",
         "battery",
-        "tray"
+        "network",
+        "custom/wlogout"
     ],
     "clock": {
         "format": "󰥔  {:%H:%M}",
@@ -28,19 +30,45 @@
     },
     "hyprland/window": {
         "format": "  {}",
-        "max-length": 50,
+        "max-length": 10,
         "separate-outputs": true,
         "rewrite": {
             "": ""
         }
     },
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "I",
+            "2": "II",
+            "3": "III",
+            "4": "IV",
+            "5": "V",
+            "6": "VI"
+        },
         "on-click": "activate",
+        "orientation": "vertical",
         "persistent-workspaces": {
-            "*": 3
+            "eDP-2": [1]
         },
         "sort-by-number": true
+    },
+    "mpris": {
+        "player": "playerctld",
+        "format": "{status_icon}  {dynamic}",
+        "format-paused": "󰏤  {dynamic}",
+        "status-icons": {
+            "playing": "󰐊",
+            "paused":  "󰏤",
+            "stopped": "󰓛"
+        },
+        "dynamic-len": 28,
+        "tooltip-format": "{player}\n{artist} — {title}"
+    },
+    "custom/wlogout": {
+        "format": "⏻",
+        "on-click": "wlogout -l ~/.config/wlogout/layout -C ~/.config/wlogout/style.css -b 2",
+        "tooltip": false
     },
     "network": {
         "format-wifi": "󰖩  {signalStrength}%",
